@@ -80,6 +80,8 @@ function gameLoop() {
     // do something like spawn a new object
     sphere.object3D.position.y += 0.1
   }
+  requestAnimationFrame(gameLoop);
+    
 };
 gameLoop();
 
