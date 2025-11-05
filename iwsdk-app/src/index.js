@@ -76,10 +76,10 @@ World.create(document.getElementById('scene-container'), {
 function gameLoop() {
   const leftCtrl = world.input.gamepads.left
   if (leftCtrl?.gamepad.buttons[4].pressed) {
-      console.log('x button pressed!');
-      // do something like spawn a new object
-      plantEntity.object3D.position.y += 0.1
-      }
+    console.log('x button pressed!');
+    // do something like spawn a new object
+    sphere.object3D.position.y += 0.1
+  }
 };
 gameLoop();
 
