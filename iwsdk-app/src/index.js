@@ -58,7 +58,7 @@ World.create(document.getElementById('scene-container'), {
   }
 
   // add a floor
-  const floorGeometry = new PlaneGeometry(10, 10);
+  const floorGeometry = new PlaneGeometry(30, 30);
   const floorMaterial = new MeshStandardMaterial( { color: 'green' } );
   const floorMesh = new Mesh(floorGeometry, floorMaterial);
   floorMesh.rotation.x = -Math.PI / 2;
@@ -71,6 +71,7 @@ World.create(document.getElementById('scene-container'), {
   const plantModel = AssetManager.getGLTF('myPlant').scene;
   const plantEntity = world.createTransformEntity(plantModel);
   plantEntity.object3D.position.set(-1,1,-1);
+  plantEntity.addComponent(Interactable);
 
 
 function gameLoop() {
@@ -78,7 +79,7 @@ function gameLoop() {
   if (leftCtrl?.gamepad.buttons[4].pressed) {
     console.log('x button pressed!');
     // do something like spawn a new object
-    sphere.object3D.position.y += 0.1
+    plantEntity.object3D.position.y += 0.1
   }
   requestAnimationFrame(gameLoop);
     
