@@ -1,4 +1,7 @@
 import {
+  OneHandGrabbable,
+  MovementMode,
+  DistanceGrabbable,
   Mesh,
   MeshStandardMaterial,
   SphereGeometry,
@@ -33,7 +36,10 @@ World.create(document.getElementById('scene-container'), {
     features: { }
   },
 
-  features: {locomotion: true },             // <----------------- added locomotion: true
+  features: {
+    locomotion: true,
+    grabbing: true
+  },
 
 }).then((world) => {
 
@@ -51,11 +57,8 @@ World.create(document.getElementById('scene-container'), {
   sphereEntity.object3D.position.set(0,1,-3);  
  
   // delete the sphere when it gets selected
-  sphereEntity.addComponent(Interactable);      
-  sphereEntity.object3D.addEventListener("pointerdown", removeCube);
-  function removeCube() {
-      sphereEntity.destroy();
-  }
+  sphereEntity.addComponent(Interactable);
+  sphereEntity.addComponent(OneHandGrabbable);
 
   // add a floor
   const floorGeometry = new PlaneGeometry(30, 30);
@@ -72,6 +75,10 @@ World.create(document.getElementById('scene-container'), {
   const plantEntity = world.createTransformEntity(plantModel);
   plantEntity.object3D.position.set(-1,1,-1);
   plantEntity.addComponent(Interactable);
+  plantEntity.addComponent(OneHandGrabbable);
+  plantEntity.addComponent(DistanceGrabbable) , {
+    movementMode: MovementMode.MoveTowardsTarget
+  };
 
 
 function gameLoop() {
